@@ -14,8 +14,9 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-    @GeneratedValue()
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -24,23 +25,23 @@ public class User {
     private String email;
 
     @Column(name = "full_name", nullable = false)
-    private String role;
-
-    @Column(nullable = false)
     private String fullName;
 
+    @Column(nullable = false)
+    private String role;
+
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    private List<Classroom> ownedRepositories;
+    private List<Classroom> classrooms;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<PullRequest> taughtRepositories;
+    private List<Repository> ownedRepositories;
 
-    @ManyToOne(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<PullRequest> authoredPullRequests;
 
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
     private List<PullRequest> reviewedPullRequests;
 
-    @ManyToOne(mappedBy = "commits", cascade = CascadeType.ALL)
-    private List<Commit> commits;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Commit> authoredCommits;
 }
