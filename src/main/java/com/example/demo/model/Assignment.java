@@ -36,4 +36,8 @@ public class Assignment {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL)
     private List<Repository> repositories;
+
+    @ManyToOne
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
 }

@@ -45,6 +45,6 @@ public class Repository {
     private List<Repository> childrenRepositories;
 
     @ManyToOne
-    @JoinColumn(name = "paren_repo_id")
+    @JoinColumn(name = "parent_repo_id")
     private Repository parent;
 }

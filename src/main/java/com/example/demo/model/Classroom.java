@@ -29,6 +29,14 @@ public class Classroom {
     @Column(nullable = false)
     private String semester;
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private User teacher;
+
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
+    List<Assignment> assignments;
+
+
 
 
 }
